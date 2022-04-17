@@ -1,0 +1,16 @@
+/* .marginTop {
+    margin-top: 1em;
+} */
+
+.padding {
+    padding: 1em;
+}
+
+button:hover {
+    box-shadow: 2px 2px 5px gray;
+}
+
+mat-header-cell {
+    font-weight: bold;
+    color: black;
+}

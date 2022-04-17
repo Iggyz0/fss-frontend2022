@@ -1,0 +1,45 @@
+<section fxLayout="column" fxLayoutAlign="center center" class="marginTop">
+    <form fxLayout="column" fxLayoutAlign="center center" class="formDecoration fixOverlap"
+    #f="ngForm" (ngSubmit)="onSubmit(f)">
+
+        <div fxFill>
+            <p fxFill class="loginHeaderTop">Edit note:</p>
+            <mat-divider fxFill class="marginTopFormElements"></mat-divider>
+        </div>
+
+        <mat-form-field appearance="outline" class="marginTopFormElements">
+            <mat-label>Title: </mat-label>
+            <input type="text" ngModel matInput [(ngModel)]="data.title" name="title"
+            required #titleInput="ngModel"/>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" hintLabel="Separate tags with commas (tag1,tag2,tag3...)">
+            <mat-label>Tags: </mat-label>
+            <input type="text" ngModel matInput placeholder="Tags..." name="tags"
+            required #tagsInput="ngModel" [(ngModel)]="data.tags"/>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <textarea matInput
+            #textarea 
+            type="text"
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="8"
+            cdkAutosizeMaxRows="10"
+            placeholder="Note Content..."
+            ngModel
+            name="noteContent"
+            #noteContentInput="ngModel"
+            [(ngModel)]="data.content">
+            
+            </textarea>
+        </mat-form-field>
+
+        <mat-form-field class="invisible-mat-input">
+            <input matInput placeholder="id" ngModel name="id" #noteId="ngModel" [(ngModel)]="data.id">
+        </mat-form-field>
+  
+        <button type="submit" fxFill mat-raised-button color="accent" [disabled]="f.invalid">Edit note</button>
+    </form>
+</section>

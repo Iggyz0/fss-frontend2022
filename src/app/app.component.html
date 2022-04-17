@@ -1,0 +1,53 @@
+<div fxFlex fxFlexFill fxLayout="column wrap" class="mat-app-background appcomp" [ngClass]="isDarkTheme ? 'darkMode' : ''">
+
+  <div fxFlex fxFlexFill class="app-content" fxLayout="column wrap">
+    <mat-toolbar class="toolbarColor" fxLayout="row wrap" fxLayoutGap="1em" fxLayoutAlign="start center">
+      <div fxFlex="33%" fxLayout="row wrap" fxLayoutAlign="start center">
+        <div class="logo">
+          <!-- <a routerLink="/"><img src="../assets/logo-2-him.png" /></a> -->
+        </div>
+        <span class="titleInToolbar"><a routerLink="/welcome">File Storage service</a></span>
+      </div>
+
+      <span class="example-spacer"></span>
+
+      <div fxFlex class="heightHundred" fxHide.lt-md fxLayoutGap="1em" fxLayoutAlign="end center">
+        <a *ngIf="(isLoggedIn$ | async) as isLoggedIn" id="files" routerLink="/files" class="borderTopHover toolbarLinks">Files</a>
+        <a *ngIf="(isLoggedIn$ | async) as isLoggedIn" id="audio" routerLink="/audio" class="borderTopHover toolbarLinks">Audio</a>
+        <a *ngIf="(isLoggedIn$ | async) as isLoggedIn" id="photos" routerLink="/photos" class="borderTopHover toolbarLinks">Photos</a>
+        <a *ngIf="(isLoggedIn$ | async) as isLoggedIn" id="notes" routerLink="/notes" class="borderTopHover toolbarLinks">Notes</a>
+        <a *ngIf="!(isLoggedIn$ | async) as isLoggedIn" id="login" routerLink="/login" class="borderTopHover toolbarLinks">Login</a>
+        <a *ngIf="!(isLoggedIn$ | async) as isLoggedIn" id="signup" routerLink="/signup" class="borderTopHover toolbarLinks">Sign up</a>
+        <a *ngIf="(isLoggedIn$ | async) as isLoggedIn" id="userprofile" routerLink="/userprofile" class="usernameDisplay borderTopHover toolbarLinks">{{ currentUsername$.value | stringTrunc: 10 || "" }}</a>
+        <a *ngIf="(isLoggedIn$ | async) as isLoggedIn" (click)="logout()" class="borderTopHover toolbarLinks logoutLink">Logout</a>
+      </div>
+      
+      <div>
+        <mat-slide-toggle (change)="toggleTheme()" [checked]="isDarkTheme">
+          <mat-icon *ngIf="isDarkTheme">dark_mode</mat-icon>
+          <mat-icon *ngIf="!isDarkTheme" style="color: white;">light_mode</mat-icon>
+        </mat-slide-toggle>
+      </div>
+    </mat-toolbar>
+
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+
+    <span class="example-spacer"></span>
+
+    <mat-toolbar fxLayout="row wrap" id="footer" class="toolbarColor" fxLayoutAlign="center center">
+      <div class="logo" fxLayoutAlign="center center">
+        <a href="https://github.com/Iggyz0" target="_blank" fxLayoutAlign="center center"><img src="../assets/img/github.png" /></a>
+      </div>
+      <span class="example-spacer"></span>
+      <footer>
+        Copyright &copy; Igor Marković 2018202563 -  Thesis
+      </footer>
+      <span class="example-spacer"></span>
+    </mat-toolbar>
+
+  </div>
+
+
+</div>

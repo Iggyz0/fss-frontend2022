@@ -1,0 +1,24 @@
+.file-input {
+    display: none;
+}
+
+.loginHeaderTop {
+    font-weight: bold;
+    font-size: 1em;
+    text-align: start;
+}
+
+.formDecoration {
+    /* border: 1px solid #ccc!important; */
+    /* border: 1px solid rgba(204,204,204,0.6);
+    border-radius: 16px; */
+    padding: 18px;
+}
+
+.fixOverlap {
+    margin-bottom: 2em;
+}
+
+.progress p {
+    font-weight: bold;
+}

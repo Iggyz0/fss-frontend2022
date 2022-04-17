@@ -1,0 +1,56 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em">
+    <div fxLayout="row wrap" fxLayoutAlign="center center">
+        <mat-form-field hintLabel="Searc by title, artist, genre...">
+            <input type="text" ngModel matInput placeholder="Search audio files..." name="search" #searchValue="ngModel" (keyup)="search(searchValue.value)"/>
+        </mat-form-field>
+    </div>
+    <div fxFlex fxLayout="row wrap" fxLayoutAlign="center center">
+        <mat-card class="example-card" *ngFor="let audio of data" fxFlex fxLayout="column" fxLayoutAlign="center center">
+            <mat-card-header >
+                <div mat-card-avatar class="audio-header-image"></div>
+                <mat-card-title class="dont-break-out truncate">{{ audio.fileName | stringTrunc: 20 }}</mat-card-title>
+                <mat-card-subtitle class="dont-break-out truncate">
+                    {{ audio.fileType }}
+                </mat-card-subtitle>
+            </mat-card-header>
+        
+            <mat-card-content fxFlex fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="2px">
+                <p>
+                    <b>Size:</b> {{ audio.fileSize }}
+                </p>
+                <p>
+                    <b>Duration:</b> {{ audio.duration }}min
+                </p>
+                <p>
+                    <b>Genre(s):</b> {{ audio.genre || "N/A" }}
+                </p>
+                <p>
+                    <b>Sample Rate:</b> {{ audio.sampleRate }}
+                </p>
+                <p>
+                    <b>Channel type:</b> {{ audio.channelType }} ({{ audio.audioChannels }} channels)
+                </p>
+                <p class="audioArtist">
+                    <b>Artist:</b> {{ audio.artist || "N/A" }}
+                </p>
+            </mat-card-content>
+
+            <audio controls>
+                <source src="{{audio.downloadPath}}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        
+            <mat-card-actions fxFill fxLayout="row" fxLayoutAlign="space-between center">
+                <button class="cardActionsButton" fxFlex="49%" mat-raised-button color="primary" (click)="downloadAudio(audio.fileName)">
+                    Download
+                </button>
+        
+                <button class="cardActionsButton" fxFlex="49%" mat-raised-button color="warn"
+                        (click)="deleteAudio( audio.fileName )">
+                    Delete
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+</div>

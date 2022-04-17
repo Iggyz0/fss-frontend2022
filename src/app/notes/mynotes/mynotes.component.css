@@ -1,0 +1,91 @@
+.note-card {
+    max-width: 300px;
+    max-height: 400px;
+    min-width: 300px;
+    min-height: 400px;
+    margin: 5px;
+}
+
+.note-header-image {
+    background-image: url("../../../assets/img/notes/note-avatar.png");
+    background-size: cover;
+}
+
+mat-card-header {
+    max-width: 280px;
+}
+
+mat-card-subtitle{
+    max-width: 200px;
+}
+
+mat-card-title{
+    color:rgb(0, 55, 128);
+    font-size:40px;
+    max-width: 200px;
+}
+
+mat-card-content {
+    max-width: 250px;
+    min-width: 250px;
+    max-height: 250px;
+    min-height: 250px;
+    overflow: auto;
+    border: 1px solid rgba(204,204,204,0.6);
+    border-radius: 13px;
+    padding: 0.5em;
+}
+
+mat-card-actions {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.cardActionsButton {
+    margin: 0 !important;
+}
+
+.dont-break-out {
+    /* These are technically the same, but use both */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    -ms-word-break: break-all;
+    /* This is the dangerous one in WebKit, as it breaks things wherever */
+    word-break: break-all;
+    /* Instead use this non-standard one: */
+    word-break: break-word;
+
+    /* Adds a hyphen where the word breaks, if supported (No Blink) */
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+.ellipses {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.truncate {
+    width: 350px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.loginHeaderTop {
+    font-weight: bold;
+    font-size: 1em;
+    text-align: start;
+}
+
+.marginTop {
+    margin-top: 2em;
+}
+
+.marginTopFormElements {
+    margin-top: 1em;
+}

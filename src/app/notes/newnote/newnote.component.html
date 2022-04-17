@@ -1,0 +1,36 @@
+<section fxLayout="column" fxLayoutAlign="center center" class="marginTop">
+    <form fxLayout="column" fxLayoutAlign="center center" class="formDecoration fixOverlap"
+    #f="ngForm" (ngSubmit)="onSubmit(f)">
+
+        <div fxFill>
+            <p fxFill class="loginHeaderTop">Create a new note:</p>
+            <mat-divider fxFill class="marginTopFormElements"></mat-divider>
+        </div>
+  
+        <mat-form-field appearance="outline" class="marginTopFormElements">
+            <mat-label>Title: </mat-label>
+            <input type="text" ngModel matInput placeholder="Title" name="title" required>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" hintLabel="Separate tags with commas (tag1,tag2,tag3...)">
+            <mat-label>Tags: </mat-label>
+            <input type="text" ngModel matInput placeholder="Tags..." name="tags" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <textarea matInput
+            #textarea 
+            type="text"
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="8"
+            cdkAutosizeMaxRows="10"
+            placeholder="Note Content..."
+            ngModel
+            name="noteContent">
+            </textarea>
+        </mat-form-field>
+  
+        <button type="submit" fxFill mat-raised-button color="primary" [disabled]="f.invalid">Create</button>
+    </form>
+</section>

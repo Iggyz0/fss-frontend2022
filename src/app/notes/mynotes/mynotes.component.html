@@ -1,0 +1,47 @@
+<div fxLayout="column" fxLayoutAlign="center center" class="marginTop">
+    <div fxLayout="row wrap" fxLayoutAlign="center center">
+
+        <mat-form-field appearance="standard">
+            <mat-label>Search:</mat-label>
+            <input type="text" ngModel matInput placeholder="Search notes..." name="search" #searchValue="ngModel" (keyup)="search(searchValue.value)"/>
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        <!-- &nbsp;
+        <button mat-raised-button style="background-color:rgb(0, 102, 255); color:white" (click)="search(searchValue.value)">
+            Search
+        </button> -->
+    </div>
+
+    <div fxFlex fxLayout="row wrap" fxLayoutAlign="center center">
+        <mat-card class="note-card" *ngFor="let note of data" fxFlex fxLayout="column nowrap" fxLayoutAlign="center center">
+            <mat-card-header>
+                <div mat-card-avatar class="note-header-image"></div>
+                <mat-card-title class="dont-break-out truncate">{{ note.title }}</mat-card-title>
+                <mat-card-subtitle class="dont-break-out truncate">
+                    {{ note.tags }}
+                </mat-card-subtitle>
+                <mat-card-subtitle *ngIf="note.tags[0].length == 0">
+                    No tags set...
+                </mat-card-subtitle>
+            </mat-card-header>
+        
+            <mat-card-content fxFlex>
+                <p>
+                    {{ note.content }}
+                </p>
+            </mat-card-content>
+        
+            <mat-card-actions fxFill fxLayout="row" fxLayoutAlign="space-between center">
+                <button class="cardActionsButton" fxFlex="49%" mat-raised-button color="accent" (click)="editNoteRedirect(note.id)">
+                    Edit
+                </button>
+        
+                <button class="cardActionsButton" fxFlex="49%" mat-raised-button color="warn"
+                        (click)="deleteNote( note.id )">
+                    Delete
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+</div>

@@ -1,0 +1,31 @@
+<div fxLayout="column" fxLayoutAlign="center center" class="marginTop">
+    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px"
+    #f="ngForm" (ngSubmit)="onSubmit(f)" class="formDecoration">
+  
+        <div fxFill>
+            <p fxFill class="loginHeaderTop">Enter your login details:</p>
+            <mat-divider fxFill class="marginTopFormElements"></mat-divider>
+        </div>
+
+        <mat-form-field appearance="outline" class="matFormField">
+            <mat-label>Username: </mat-label>
+            <input type="text" ngModel matInput placeholder="Username" name="username"
+            required #usernameInput="ngModel">
+            
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="matFormField">
+            <mat-label>Password: </mat-label>
+            <input type="password" ngModel matInput placeholder="Password" name="password"
+            required #userInput="ngModel">
+        </mat-form-field>
+  
+        <button type="submit" fxFill mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>
+
+        <div fxFill>
+            <mat-divider fxFill class="marginTopFormElements"></mat-divider>
+            <p fxFill class="loginHeaderBot marginTopFormElements">Don't have an account?</p>
+            <p fxFill class="loginHeaderBot"><a class="registerLink" routerLink="/signup">Register here.</a></p>
+        </div>
+    </form>
+</div>

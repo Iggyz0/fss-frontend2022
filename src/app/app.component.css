@@ -1,0 +1,90 @@
+.toolbarColor {
+  background-color: #3f3c47;
+}
+
+.appcomp {
+  min-height: 100vh;
+  position: relative;
+}
+
+.appcomp * {
+  z-index: 1;
+}
+
+.app-content {
+  position: relative;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.heightHundred {
+  height: 100%;
+}
+
+/* .mat-tab-custom {
+  width: 50% !important;
+} */
+
+.logo > a > img {
+  height: 2em;
+  overflow: hidden;
+}
+
+.toolbarLinks {
+  align-items: center;
+  display: flex;
+  height: 96%;
+}
+
+.usernameDisplay {
+  font-size: 1.10em;
+  text-transform: uppercase;
+  color: white;
+}
+
+mat-toolbar a, .titleInToolbar {
+  font-size: 1.10em;
+  text-transform: uppercase;
+  color: white;
+  /* -webkit-text-fill-color: white;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: salmon; */
+}
+
+.logoutLink:hover {
+  cursor: pointer;
+}
+
+.borderTopHover {
+  border-top: 2px solid transparent;
+}
+
+@keyframes goldenLinks {
+  from {color: white;}
+  to {color: gold;}
+}
+
+.borderTopHover:hover {
+  border-top: 2px solid gold;
+  color: gold;
+  /* animation-name: goldenLinks;
+  animation-duration: 0.3s; */
+  transition: 0.1s ease-in;
+}
+
+#footer{
+  text-align: center;
+  color: white;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  /* z-index: 5; */
+  background-color: #3f3c47 !important;
+}
+
+.activeRouteLink {
+  border-top: 2px solid gold;
+  color: gold !important;
+}
