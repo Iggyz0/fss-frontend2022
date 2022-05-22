@@ -25,8 +25,9 @@ export class LoginComponent implements OnInit {
     }
 
     this.authService.loginUser(user).subscribe(response => {
-      
-      if (response.headers.get("authorization") != null && response.headers.get("authorization") != "") {
+
+      if (response.headers.get("authorization") != null && response.headers.get("authorization") != "" && response != null && response.ok) {
+
         this.authService.getJwtTokenService().setToken(response.headers.get("authorization")!);
         this.authService.getLocalStorageService().setLocalStorageItem("token", response.headers.get("authorization")!);
         this.authService.getLocalStorageService().setLocalStorageItem("username", user.username);
@@ -47,7 +48,7 @@ export class LoginComponent implements OnInit {
       else {
         this._snackBar.open("Something went wrong...", "", {duration: 2500});
       }
-    });
+    }, err => this._snackBar.open("Something went wrong...", "", {duration: 2500}) );
   }
   
 }

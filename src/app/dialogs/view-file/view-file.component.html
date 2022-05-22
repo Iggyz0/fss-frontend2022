@@ -1,0 +1,42 @@
+<div fxFlex fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em">
+    <div fxFlex fxFill fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxFlex>
+        <span>File "{{data.fileName}}" details:</span>
+      </div>
+      <button mat-raised-button [mat-dialog-close]="false" (click)="close()" color="warn">
+        <mat-icon matListIcon>close</mat-icon>
+      </button>
+    </div>
+    <mat-divider style="width: 100%;"></mat-divider>
+    <div fxFlex fxFill fxLayout="column" fxLayoutAlign="end center">
+      <mat-dialog-content fxFill class="scroll">
+
+        <div *ngIf="ftype == 'audio'; else vid" fxLayoutAlign="center center">
+            <audio controls>
+                <source src="{{fileTypeUrl}}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
+        <ng-template #vid>
+            <video class="view-image" controls *ngIf="ftype == 'video'; else image">
+                <source src="{{fileTypeUrl}}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </ng-template>
+
+        <ng-template #image>
+            <img class="view-image" src="{{fileTypeUrl}}" alt="{{data.fileName}}" *ngIf="ftype == 'image'; else dontshow"/>
+        </ng-template>
+
+        <ng-template #dontshow>
+            <p>File type ({{data.extension}}) is not supported right now.</p>
+        </ng-template>
+  
+      </mat-dialog-content>
+    </div>
+    
+    <button mat-raised-button color="primary" (click)="close()">
+      Close
+    </button>
+  </div>

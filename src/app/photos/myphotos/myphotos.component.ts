@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Photo } from 'src/app/model/photo';
 import { JwttokenService } from 'src/app/services/jwttoken.service';
+import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { PhotoService } from 'src/app/services/photo.service';
 
 @Component({
@@ -13,9 +14,14 @@ import { PhotoService } from 'src/app/services/photo.service';
 })
 export class MyphotosComponent implements OnInit {
 
-  constructor(private photoService: PhotoService, private _snackBar: MatSnackBar, private router: Router, private jwtTokenService: JwttokenService) { }
+  constructor(private photoService: PhotoService, private _snackBar: MatSnackBar, private jwtTokenService: JwttokenService, private localstorage: LocalstorageService) { }
 
   data: any;
+
+  public showPhoto(fileName: string) : any {
+    const url = "http://localhost:8080/photos/myphotos/showphoto?fileName=" + fileName + "&username=" + this.jwtTokenService.getUser().username + "&access_token=" + this.localstorage.getLocalStorageItem("token");
+    return url;
+  }
 
   ngOnInit(): void {
     this.findAllByUsername();

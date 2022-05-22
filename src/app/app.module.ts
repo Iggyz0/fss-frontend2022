@@ -41,6 +41,7 @@ import { MyaudioComponent } from './audio/myaudio/myaudio.component';
 
 import { StringTruncationPipe } from './string-trunc';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ViewFileComponent } from './dialogs/view-file/view-file.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     NewaudioComponent,
     MyaudioComponent,
     StringTruncationPipe,
-    UserProfileComponent
+    UserProfileComponent,
+    ViewFileComponent
   ],
   imports: [
     BrowserModule,

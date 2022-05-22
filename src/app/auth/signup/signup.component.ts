@@ -40,7 +40,7 @@ export class SignupComponent implements OnInit {
       else {
         this._snackBar.open("Username already exists. Please choose another one...", "", {duration: 2500});
       }
-    });
+    }, err => this._snackBar.open("Something went wrong again...", "", {duration: 2500}) );
   }
 
 }

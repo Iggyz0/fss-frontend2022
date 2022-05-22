@@ -26,15 +26,24 @@
                 <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
                 <mat-cell *matCellDef="let element">
                     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="0.5em">
-                        <button mat-raised-button color="accent" (click)="downloadFile(element.id)">
+                        <button mat-raised-button color="primary" (click)="downloadFile(element.id, element.fileName, element.extension)">
                             Download
                         </button>
-                        <button mat-raised-button color="warn" (click)="deleteFile(element.id)">
+                        <button mat-raised-button color="accent" (click)="viewFile(element)">
+                            View
+                        </button>
+                        &nbsp; | &nbsp;&nbsp;
+                        <button mat-raised-button color="warn" (click)="deleteFile(element.id, element.fileName, element.extension)">
                             Delete
                         </button>
                     </div>
                 </mat-cell>
             </ng-container>
+
+            <!-- if no data is found!aa -->
+            <div fxFill fxLayoutAlign="center center" *matNoDataRow style="padding: 1em;">
+                <p><b>No files in storage yet.</b></p>
+            </div>
 
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let rows; columns: displayedColumns;"></mat-row>

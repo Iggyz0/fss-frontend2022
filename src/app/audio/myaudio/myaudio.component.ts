@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AudioService } from 'src/app/services/audio.service';
 import { JwttokenService } from 'src/app/services/jwttoken.service';
+import { LocalstorageService } from 'src/app/services/localstorage.service';
 
 @Component({
   selector: 'app-myaudio',
@@ -11,9 +12,14 @@ import { JwttokenService } from 'src/app/services/jwttoken.service';
 })
 export class MyaudioComponent implements OnInit {
 
-  constructor(private audioService: AudioService, private _snackBar: MatSnackBar, private jwtTokenService: JwttokenService) { }
+  constructor(private audioService: AudioService, private _snackBar: MatSnackBar, private jwtTokenService: JwttokenService, private localstorage: LocalstorageService) { }
 
   data: any;
+
+  public showAudio(fileName: string) : any {
+    const url = "http://localhost:8080/audio/myaudio/showaudio?fileName=" + fileName + "&username=" + this.jwtTokenService.getUser().username + "&access_token=" + this.localstorage.getLocalStorageItem("token");
+    return url;
+  }
 
   ngOnInit(): void {
     this.findAllByUsername();
