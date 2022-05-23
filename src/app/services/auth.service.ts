@@ -14,14 +14,6 @@ export class AuthService {
 
   constructor(private http: HttpClient, private localStorageService: LocalstorageService, private jwtTokenService: JwttokenService) { }
 
-  getJwtTokenService(): JwttokenService {
-    return this.jwtTokenService;
-  }
-
-  getLocalStorageService(): LocalstorageService {
-    return this.localStorageService;
-  }
-
   loginUser(user: User): Observable<HttpResponse<any>> {
     const url = "http://localhost:8080/auth/login";
 

@@ -2,3 +2,9 @@ a {
     color: rgb(42, 198, 250);
     text-decoration: underline;
 }
+
+#smh {
+    font-weight: bold;
+    font-size: 8em;
+    text-align: center;
+}

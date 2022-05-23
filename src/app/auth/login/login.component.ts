@@ -4,6 +4,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { User } from 'src/app/model/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { JwttokenService } from 'src/app/services/jwttoken.service';
+import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -13,7 +15,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router, private userService: UserService,private _snackBar: MatSnackBar) { }
+  constructor(private authService: AuthService, private jwtTokenService: JwttokenService, private localstorageService: LocalstorageService, private router: Router, private userService: UserService,private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -28,9 +30,10 @@ export class LoginComponent implements OnInit {
 
       if (response.headers.get("authorization") != null && response.headers.get("authorization") != "" && response != null && response.ok) {
 
-        this.authService.getJwtTokenService().setToken(response.headers.get("authorization")!);
-        this.authService.getLocalStorageService().setLocalStorageItem("token", response.headers.get("authorization")!);
-        this.authService.getLocalStorageService().setLocalStorageItem("username", user.username);
+        this.jwtTokenService.setToken(response.headers.get("authorization")!);
+        this.localstorageService.setLocalStorageItem("token", response.headers.get("authorization")!);
+        this.localstorageService.setLocalStorageItem("username", response.body.username);
+        this.localstorageService.setLocalStorageItem("id", response.body.id);
 
         this.userService.setCurrentUser(
           {

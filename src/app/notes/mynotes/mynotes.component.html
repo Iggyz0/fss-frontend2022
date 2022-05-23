@@ -1,9 +1,20 @@
 <div fxLayout="column" fxLayoutAlign="center center" class="marginTop">
     <div fxLayout="row wrap" fxLayoutAlign="center center">
 
-        <mat-form-field appearance="standard">
-            <mat-label>Search:</mat-label>
-            <input type="text" ngModel matInput placeholder="Search notes..." name="search" #searchValue="ngModel" (keyup)="search(searchValue.value)"/>
+        <!-- search and sort -->
+        <mat-form-field color="primary" fxFlexAlign="center" appearance="standard">
+            <mat-label>Search your notes</mat-label>
+            <input
+              type="text"
+              ngModel
+              matInput
+              placeholder="Search your notes..."
+              name="search"
+              search
+              #searchInput="ngModel"
+              [(ngModel)]="searchValue"
+              (keyup)="searchNotes()"
+            />
             <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
         <!-- &nbsp;
@@ -13,7 +24,7 @@
     </div>
 
     <div fxFlex fxLayout="row wrap" fxLayoutAlign="center center">
-        <mat-card class="note-card" *ngFor="let note of data" fxFlex fxLayout="column nowrap" fxLayoutAlign="center center">
+        <mat-card class="note-card" *ngFor="let note of displayedData" fxFlex fxLayout="column nowrap" fxLayoutAlign="center center">
             <mat-card-header>
                 <div mat-card-avatar class="note-header-image"></div>
                 <mat-card-title class="dont-break-out truncate">{{ note.title }}</mat-card-title>

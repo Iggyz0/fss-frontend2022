@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AudioService } from 'src/app/services/audio.service';
 import { JwttokenService } from 'src/app/services/jwttoken.service';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
+import { Audio } from 'src/app/model/audio';
 
 @Component({
   selector: 'app-myaudio',
@@ -14,7 +15,10 @@ export class MyaudioComponent implements OnInit {
 
   constructor(private audioService: AudioService, private _snackBar: MatSnackBar, private jwtTokenService: JwttokenService, private localstorage: LocalstorageService) { }
 
-  data: any;
+  data: Audio[] = [];
+  displayedData: Audio[] = [];
+  p: number = 1; // for pagination
+  searchValue: string = '';
 
   public showAudio(fileName: string) : any {
     const url = "http://localhost:8080/audio/myaudio/showaudio?fileName=" + fileName + "&username=" + this.jwtTokenService.getUser().username + "&access_token=" + this.localstorage.getLocalStorageItem("token");
@@ -33,6 +37,7 @@ export class MyaudioComponent implements OnInit {
       // })
       
       this.data = data;
+      this.displayedData = this.data;
     });
   }
 
@@ -91,20 +96,24 @@ export class MyaudioComponent implements OnInit {
     return convertedTime;
   }
 
-  search(search: string) {
-    search = search.trim();
-    if (search != "") {
-      this.audioService.searchAudio(search, this.jwtTokenService.getUser().username).subscribe(result => { 
-        // result.forEach(element => {
-        //   element.sampleRate += " Hz";
-        // })
-        
-        this.data = result; 
-      });
-    }
+  searchAudio() {
+    let search = this.searchValue.trim().toLowerCase();
+    let arr = this.data;
+    this.p = 1;
+
+    if (search == '')
+      arr = this.data;
     else {
-      this.findAllByUsername();
+      arr = this.data.filter(obj => { 
+        return ( obj.fileName.toLowerCase().includes(search) || 
+          ( obj.genre ? obj.genre.toLowerCase().includes(search) : null) || 
+          ( obj.artist ? obj.artist.toLowerCase().includes(search) : null)
+        ); 
+      });
+      this.p = 1;
     }
+
+    this.displayedData = arr;
   }
 
 }

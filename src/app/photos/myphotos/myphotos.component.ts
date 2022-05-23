@@ -16,7 +16,10 @@ export class MyphotosComponent implements OnInit {
 
   constructor(private photoService: PhotoService, private _snackBar: MatSnackBar, private jwtTokenService: JwttokenService, private localstorage: LocalstorageService) { }
 
-  data: any;
+  data: Photo[] = [];
+  displayedData: Photo[] = [];
+  p: number = 1; // for pagination
+  searchValue: string = '';
 
   public showPhoto(fileName: string) : any {
     const url = "http://localhost:8080/photos/myphotos/showphoto?fileName=" + fileName + "&username=" + this.jwtTokenService.getUser().username + "&access_token=" + this.localstorage.getLocalStorageItem("token");
@@ -37,7 +40,23 @@ export class MyphotosComponent implements OnInit {
       });
 
       this.data = temp; 
+      this.displayedData = this.data;
     });
+  }
+
+  searchPhotos() {
+    let search = this.searchValue.trim().toLowerCase();
+    let arr = this.data;
+    this.p = 1;
+
+    if (search == '')
+      arr = this.data;
+    else {
+      arr = this.data.filter(obj => { return (obj.fileName.toLowerCase().includes(search) || obj.fileType!.toLowerCase().includes(search) ); });
+      this.p = 1;
+    }
+
+    this.displayedData = arr;
   }
 
   public deletePhoto(fileName: string): any {
@@ -61,8 +80,8 @@ export class MyphotosComponent implements OnInit {
     return null;
   }
 
-  bytesToSize(bytesString: string) {
-    let bytes = parseInt(bytesString);
+  bytesToSize(bytesString: string | undefined) {
+    let bytes = bytesString ? parseInt(bytesString) : 0;
     const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB']
     if (bytes === 0) return 'n/a'
     const i = Math.floor(Math.log(bytes) / Math.log(1024));

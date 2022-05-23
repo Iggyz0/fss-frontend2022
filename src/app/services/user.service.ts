@@ -28,17 +28,16 @@ export class UserService {
     return this.localStorageService.getLocalStorageItem("username");
   }
 
-  getUserById(id: string): any {
+  getUserById(id: string): User {
     this.getUserByIdFromTheServer(id).subscribe(result => {
       if (result != null) {
         this.currentUser = result;
         this.currentUsername.next(this.currentUser.username);
         return this.currentUser;
       }
-      else {
-        return null;
-      }
+      return new User();
     });
+    return new User();
   }
 
   getUserByUsername(username: string): any {

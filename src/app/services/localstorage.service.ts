@@ -26,5 +26,6 @@ export class LocalstorageService {
   clearLocalStorageOnLogout() {
     localStorage.removeItem("username");
     localStorage.removeItem("token");
+    localStorage.removeItem("id");
   }
 }

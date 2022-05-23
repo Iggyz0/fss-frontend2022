@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
+import { JwttokenService } from './services/jwttoken.service';
 import { LocalstorageService } from './services/localstorage.service';
 import { RouteInfoService } from './services/route-info.service';
 import { UserService } from './services/user.service';
@@ -19,25 +20,28 @@ export class AppComponent implements OnInit {
   isDarkTheme: boolean = false;
   currentUsername$: any;
   
-  constructor(private authService: AuthService, private userService: UserService, private localStorageService: LocalstorageService, private routeInfo: RouteInfoService, private router: Router, private _snackBar: MatSnackBar) { }
+  constructor(private authService: AuthService, private userService: UserService, private localStorageService: LocalstorageService, private jwtTokenService: JwttokenService, private routeInfo: RouteInfoService, private router: Router, private _snackBar: MatSnackBar) { }
 
   ngOnInit() {    
-    this.authService.getJwtTokenService().setToken(
-      this.authService.getLocalStorageService().getLocalStorageItem("token") || null
+    this.jwtTokenService.setToken(
+      this.localStorageService.getLocalStorageItem("token") || null
     );    
 
-    if (this.authService.getJwtTokenService().isTokenExpired()) {
+    if (this.jwtTokenService.isTokenExpired()) {
       this._snackBar.open("Session expired, please log in.", "", { duration: 2500 });
       this.authService.logout();
     } else {
       this.isLoggedIn$ = this.authService.isUserLoggedIn();
   
+      // NOTE: check security of this code
       if (this.isLoggedIn$) {
         if(this.localStorageService.getLocalStorageItem("username")?.trim() !== "" && 
            this.localStorageService.getLocalStorageItem("username") !== null && 
-           this.authService.getLocalStorageService().getLocalStorageItem("token") !== null) {
-          this.userService.currentUsername.next(this.authService.getJwtTokenService().getUser().username);
-          this.userService.currentUser.id = this.authService.getJwtTokenService().getUser().id;
+           this.localStorageService.getLocalStorageItem("token") !== null) {
+
+            this.userService.currentUsername.next(this.jwtTokenService.getUser().username);
+            this.userService.currentUser = this.userService.getUserById(this.jwtTokenService.getUser().id!);
+          
         }
       }
     }
@@ -55,17 +59,17 @@ export class AppComponent implements OnInit {
     this.isDarkTheme = !this.isDarkTheme;
 
     if (this.isDarkTheme)
-      this.authService.getLocalStorageService().setLocalStorageItem("theme", "dark");
+      this.localStorageService.setLocalStorageItem("theme", "dark");
     else
-      this.authService.getLocalStorageService().setLocalStorageItem("theme", "light");
+      this.localStorageService.setLocalStorageItem("theme", "light");
   }
 
   getThemePreferenceFromLocalStorage() {
-    if(this.authService.getLocalStorageService().getLocalStorageItem("theme")) {
-      if(this.authService.getLocalStorageService().getLocalStorageItem("theme")?.valueOf() == "light") {
+    if(this.localStorageService.getLocalStorageItem("theme")) {
+      if(this.localStorageService.getLocalStorageItem("theme")?.valueOf() == "light") {
         this.isDarkTheme = false;
       }
-      else if (this.authService.getLocalStorageService().getLocalStorageItem("theme")?.valueOf() == "dark")
+      else if (this.localStorageService.getLocalStorageItem("theme")?.valueOf() == "dark")
         this.isDarkTheme = true;
       else
         this.isDarkTheme = false;
