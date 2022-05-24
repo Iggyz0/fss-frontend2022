@@ -7,3 +7,7 @@
     height: 100%; 
     object-fit: contain;
 }
+
+.not-supported-text {
+    text-align: center;
+}

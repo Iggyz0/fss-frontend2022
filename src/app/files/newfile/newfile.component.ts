@@ -53,7 +53,12 @@ export class NewfileComponent implements OnInit {
           this.uploadProgress = Math.round(100 * (event.loaded / event.total!));
         }
         if (event == null) { this._snackBar.open("Upload failed.", "", {duration: 2500}); }
-      }).add(() => { this.files = new Array<File>(); this.fileName = ""; this.fileMissing = ""; });
+      }).add(() => { 
+        this.files = new Array<File>(); this.fileName = ""; 
+        this.fileMissing = ""; 
+        this._snackBar.open("File(s) successfully uploaded!", "", {duration: 2500}); 
+        this.uploadProgress = 0;
+      });
     }
   }
 
