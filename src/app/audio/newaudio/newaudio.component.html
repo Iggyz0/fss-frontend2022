@@ -1,26 +1,31 @@
 <div fxLayout="column" fxLayoutAlign="center center" class="formDecoration fixOverlap">
-    <div>
-        <p fxFill class="loginHeaderTop">Choose file(s) to upload:</p>
-    </div>
-    <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="2em" class="file-form">
-  
-        <input type="file" class="file-input" name="file" #fileUpload required (change)="onFileSelected($event)" multiple />
 
-        <div class="file-upload">
-
-            {{ fileName || "No file uploaded yet." }}
-            
-            <button type="button" mat-mini-fab color="primary" (click)="fileUpload.click()">
-                <mat-icon>attach_file</mat-icon>
-            </button>
-            <br/>
-        </div>
+    <div fxLayout="column" fxLayoutAlign="center center" class="content-wrapper">
 
         <div>
-            {{ fileMissing || "" }}
+            <p fxFill class="loginHeaderTop">Choose audio file to upload:</p>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="2em" class="file-form">
+      
+            <input type="file" class="file-input" name="file" #fileUpload required (change)="onFileSelected($event)" multiple />
+    
+            <div class="file-upload">
+    
+                {{ fileName || "No audio file chosen yet." }}
+                
+                <button type="button" mat-mini-fab color="primary" (click)="fileUpload.click()">
+                    <mat-icon>attach_file</mat-icon>
+                </button>
+                <br/>
+            </div>
+    
+            <div>
+                {{ fileMissing || "" }}
+            </div>
+    
+            <button type="button" mat-raised-button color="primary" (click)="onSubmit()">Upload audio</button>
         </div>
 
-        <button type="button" mat-raised-button color="primary" (click)="onSubmit()">Upload</button>
     </div>
 
 </div>

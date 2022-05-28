@@ -1,7 +1,7 @@
-<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em">
-    <div fxLayout="row wrap" fxLayoutAlign="center center">
+<div fxFlex fxLayout="column" fxLayoutAlign="center center" class="formDecoration fixOverlap">
+    <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
         <!-- search and sort -->
-        <mat-form-field color="primary" fxFlexAlign="center" appearance="standard">
+        <mat-form-field color="primary" fxFlexAlign="center" appearance="outline">
             <mat-label>Search your audio</mat-label>
             <input
               type="text"
@@ -17,8 +17,16 @@
             <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
     </div>
+
+    <div *ngIf="displayedData.length > 0" fxLayout="column" fxLayoutAlign="center center">
+        <pagination-controls (pageChange)="p = $event" class="my-pagination" style="padding: 1em;"></pagination-controls>
+    </div>
+
     <div fxFlex fxLayout="row wrap" fxLayoutAlign="center center">
-        <mat-card class="example-card" *ngFor="let audio of displayedData" fxFlex fxLayout="column" fxLayoutAlign="center center">
+        <div *ngIf="displayedData.length == 0">
+            <p>No audio files found!</p>
+        </div>
+        <mat-card class="example-card" *ngFor="let audio of displayedData | paginate: { itemsPerPage: 12, currentPage: p }" fxFlex fxLayout="column" fxLayoutAlign="center center">
             <mat-card-header >
                 <div mat-card-avatar class="audio-header-image"></div>
                 <mat-card-title class="dont-break-out truncate">{{ audio.fileName | stringTrunc: 20 }}</mat-card-title>
@@ -64,6 +72,10 @@
                 </button>
             </mat-card-actions>
         </mat-card>
+    </div>
+
+    <div *ngIf="displayedData.length > 0" fxLayout="column" fxLayoutAlign="center center" >
+        <pagination-controls (pageChange)="p = $event" class="my-pagination" style="padding: 2.5em;"></pagination-controls>
     </div>
 
 </div>

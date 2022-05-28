@@ -54,6 +54,7 @@ export class MynotesComponent implements OnInit {
     }
 
     this.displayedData = arr;
+    // search via Database (MongoDB) - very fast
     // if (search != "") {
     //   this.notesService.searchNotes(search, this.jwtTokenService.getUser().username).subscribe(result => { this.data = result; });
     // }

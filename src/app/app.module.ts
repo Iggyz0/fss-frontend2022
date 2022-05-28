@@ -42,6 +42,7 @@ import { MyaudioComponent } from './audio/myaudio/myaudio.component';
 import { StringTruncationPipe } from './string-trunc';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ViewFileComponent } from './dialogs/view-file/view-file.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { ViewFileComponent } from './dialogs/view-file/view-file.component';
     RoutingModule,
     FlexLayoutModule,
     FormsModule,
-    TextFieldModule
+    TextFieldModule,
+    NgxPaginationModule
   ],
   providers: [
     AuthguardService, ComponentaccessService, NotesService, UserService, AuthService, PhotoService, FilesService, LocalstorageService, JwttokenService, AudioService, { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true}  

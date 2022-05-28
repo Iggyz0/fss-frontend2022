@@ -2,6 +2,7 @@
     max-width: 400px;
     max-height: 500px;
     margin: 5px;
+    overflow: hidden;
 }
 
 .photo-header-image {
@@ -41,6 +42,17 @@ mat-card-content > img {
     border-radius: 0.5em;
 }
 
+.formDecoration {
+    /* border: 1px solid #ccc!important; */
+    /* border: 1px solid rgba(204,204,204,0.6);
+    border-radius: 16px; */
+    padding: 18px;
+}
+
+.fixOverlap {
+    margin-bottom: 2em;
+}
+
 .dont-break-out {
     /* These are technically the same, but use both */
     overflow-wrap: break-word;
@@ -70,4 +82,42 @@ mat-card-content > img {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.box {
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    -webkit-transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  
+.box::after {
+    content: "";
+    border-radius: 5px;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    -webkit-transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+  
+.box:hover {
+    border: 1px solid #c2c2c2;
+    box-shadow: 1px 1px 14px #c2c2c2;
+    -webkit-transform: scale(1.03, 1.03);
+    transform: scale(1.03, 1.03);
+}
+  
+.box:hover::after {
+    opacity: 1;
+}
+
+.my-pagination ::ng-deep .ngx-pagination {
+    padding: 0;
 }

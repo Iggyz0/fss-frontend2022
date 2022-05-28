@@ -2,7 +2,7 @@
     <div fxLayout="row wrap" fxLayoutAlign="center center">
 
         <!-- search and sort -->
-        <mat-form-field color="primary" fxFlexAlign="center" appearance="standard">
+        <mat-form-field color="primary" appearance="outline">
             <mat-label>Search your notes</mat-label>
             <input
               type="text"
@@ -17,14 +17,17 @@
             />
             <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
-        <!-- &nbsp;
-        <button mat-raised-button style="background-color:rgb(0, 102, 255); color:white" (click)="search(searchValue.value)">
-            Search
-        </button> -->
+    </div>
+
+    <div *ngIf="displayedData.length > 0" fxLayout="column" fxLayoutAlign="center center">
+        <pagination-controls (pageChange)="p = $event" class="my-pagination" style="padding: 1em;"></pagination-controls>
     </div>
 
     <div fxFlex fxLayout="row wrap" fxLayoutAlign="center center">
-        <mat-card class="note-card" *ngFor="let note of displayedData" fxFlex fxLayout="column nowrap" fxLayoutAlign="center center">
+        <div *ngIf="displayedData.length == 0">
+            <p>No notes found!</p>
+        </div>
+        <mat-card class="note-card" *ngFor="let note of displayedData | paginate: { itemsPerPage: 12, currentPage: p }" fxFlex fxLayout="column nowrap" fxLayoutAlign="center center">
             <mat-card-header>
                 <div mat-card-avatar class="note-header-image"></div>
                 <mat-card-title class="dont-break-out truncate">{{ note.title }}</mat-card-title>
@@ -53,6 +56,10 @@
                 </button>
             </mat-card-actions>
         </mat-card>
+    </div>
+
+    <div *ngIf="displayedData.length > 0" fxLayout="column" fxLayoutAlign="center center" >
+        <pagination-controls (pageChange)="p = $event" class="my-pagination" style="padding: 2.5em;"></pagination-controls>
     </div>
 
 </div>

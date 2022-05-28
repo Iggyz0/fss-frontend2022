@@ -29,10 +29,12 @@ export class NewphotoComponent implements OnInit {
 
   onSubmit(form: NgForm): void {
     
-    this.fileName = form.value.fileName;
-    let ext = this.file.name.substr(this.file.name.lastIndexOf('.') + 1);
+    if ((form.value.fileName).trim() != "") {
+      this.fileName = form.value.fileName;
+    }
+    let ext = this.file.name.substring(this.file.name.lastIndexOf('.') + 1);
     this.formData.append("file", this.file, (this.fileName + "." + ext));
-
+    
     if (this.formData.get("file")) {
       this.fileMissing = "";
       if (this.isFileImage(this.file)) {
@@ -60,7 +62,7 @@ export class NewphotoComponent implements OnInit {
      this.file = event.target.files[0];
 
     if (this.file != null) {
-      this.fileName = this.file.name;
+      this.fileName = this.file.name.substring(0, this.file.name.lastIndexOf('.'));
     }
   }
 

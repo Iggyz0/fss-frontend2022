@@ -1,37 +1,47 @@
 <div fxLayout="column" fxLayoutAlign="center center" class="formDecoration fixOverlap">
-    <div>
-        <p fxFill class="loginHeaderTop">Choose file(s) to upload:</p>
-    </div>
-    <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="2em" class="file-form">
-  
-        <input type="file" class="file-input" name="file" #fileUpload required (change)="onFileSelected($event)" multiple />
 
-        <div class="file-upload">
+    <div fxLayout="column" fxLayoutAlign="center center" class="content-wrapper">
 
-            {{ fileName || "No file chosen yet." }}
-            
-            <button type="button" mat-mini-fab color="primary" (click)="fileUpload.click()">
-                <mat-icon>attach_file</mat-icon>
-            </button>
-            <br/>
-        </div>
 
         <div>
-            {{ fileMissing || "" }}
+            <p fxFill class="loginHeaderTop">Choose file(s) to upload:</p>
         </div>
-
-  
-        <button type="button" mat-raised-button color="primary" (click)="onSubmit()">Upload</button>
-        <div class="progress" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="2em">
-            <div *ngIf="uploadProgress">
-                <p>Uploading... {{uploadProgress}}% complete</p>
-                <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgress"></mat-progress-bar>
+        <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="2em" class="file-form">
+      
+            <input type="file" class="file-input" name="file" #fileUpload required (change)="onFileSelected($event)" multiple />
+    
+            <div class="file-upload">
+    
+                {{ fileName || "No file chosen yet." }}
+                
+                <button type="button" mat-mini-fab color="primary" (click)="fileUpload.click()">
+                    <mat-icon>attach_file</mat-icon>
+                </button>
+                <br/>
             </div>
-
-            <button type="button" mat-mini-fab color="warn" (click)="cancelUpload()" *ngIf="uploadProgress">
-                <mat-icon class="cancel-upload">cancel</mat-icon>
+    
+            <div>
+                {{ fileMissing || "" }}
+            </div>
+    
+      
+            <button type="button" mat-raised-button color="primary" (click)="onSubmit()">
+                Upload files(s)
             </button>
+
+            <div class="progress" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="2em">
+                <div *ngIf="uploadProgress">
+                    <p>Uploading... {{uploadProgress}}% complete</p>
+                    <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgress"></mat-progress-bar>
+                </div>
+    
+                <button type="button" mat-mini-fab color="warn" (click)="cancelUpload()" *ngIf="uploadProgress">
+                    <mat-icon class="cancel-upload">cancel</mat-icon>
+                </button>
+            </div>
+    
         </div>
+
 
     </div>
 

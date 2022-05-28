@@ -66,7 +66,6 @@ export class MyfilesComponent implements OnInit, AfterViewInit {
   // edit: sada radi
   // nista ne radi
   public downloadFile(id: string, fileName: string, fileType: string): HttpResponse<any> | null {
-    console.log(fileType);
     
     if (fileType.includes("audio")) {
       this.audioService.downloadAudio(fileName, this.jwtTokenService.getUser().username).subscribe(response => {

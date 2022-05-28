@@ -4,6 +4,7 @@
     min-width: 300px;
     min-height: 400px;
     margin: 5px;
+    overflow: hidden;
 }
 
 .note-header-image {
@@ -88,4 +89,8 @@ mat-card-actions {
 
 .marginTopFormElements {
     margin-top: 1em;
+}
+
+.my-pagination ::ng-deep .ngx-pagination {
+    padding: 0;
 }
