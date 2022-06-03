@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { User } from '../model/user';
 import { LocalstorageService } from '../services/localstorage.service';
 import { UserService } from '../services/user.service';
@@ -24,9 +25,10 @@ export class UserProfileComponent implements OnInit {
         
       }
     );
+  }
 
-    
-    
+  onSubmit(form: NgForm) {
+
   }
 
 }

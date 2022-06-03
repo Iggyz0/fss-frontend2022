@@ -22,7 +22,7 @@
             <mat-error *ngIf="!emailInput.hasError('required')">Please use a correct e-mail format</mat-error>
         </mat-form-field>
   
-        <mat-form-field appearance="outline" hintLabel="Minimum 8 characters">
+        <mat-form-field appearance="outline" hintLabel="Minimum 8 characters" class="matFormField">
             <mat-label>Password: </mat-label>
             <input type="password" ngModel matInput placeholder="Password" name="password" required minlength="8" #userInput="ngModel">
             <mat-hint align="end">{{ userInput.value?.length }}/8</mat-hint>
@@ -38,7 +38,7 @@
             <input type="text" ngModel matInput placeholder="Last name" name="lastName" required>
         </mat-form-field>
   
-        <button type="submit" fxFill mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>
+        <button type="submit" fxFill mat-raised-button color="primary" [disabled]="f.invalid">Register</button>
 
         <div fxFill>
             <mat-divider fxFill class="marginTopFormElements"></mat-divider>
