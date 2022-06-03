@@ -7,10 +7,10 @@
             <mat-divider fxFill class="marginTopFormElements"></mat-divider>
         </div>
 
-        <mat-form-field appearance="outline" class="matFormField">
+        <mat-form-field appearance="outline" class="matFormField" aria-disabled="true">
             <mat-label>Username: </mat-label>
             <input type="text" ngModel matInput placeholder="Username" name="username"
-            required #usernameInput="ngModel" [(ngModel)]="user.username">
+            required #usernameInput="ngModel" [(ngModel)]="user.username" readonly>
         </mat-form-field>
         
         <mat-form-field appearance="outline" class="matFormField">
@@ -24,7 +24,7 @@
   
         <mat-form-field appearance="outline" hintLabel="Minimum 8 characters" class="matFormField">
             <mat-label>Password: </mat-label>
-            <input type="password" ngModel matInput placeholder="Password" name="password" required minlength="8" #userInput="ngModel">
+            <input type="password" ngModel matInput placeholder="Password" name="password" #userInput="ngModel">
             <mat-hint align="end">{{ userInput.value?.length }}/8</mat-hint>
         </mat-form-field>
 

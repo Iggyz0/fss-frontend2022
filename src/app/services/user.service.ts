@@ -62,6 +62,10 @@ export class UserService {
     return this.http.get<User>("http://localhost:8080/users/findbyusername?username=" + username);
   }
 
+  updateUser(user: User): Observable<User> {
+    return this.http.put<User>("http://localhost:8080/users/update", user);
+  }
+
 }
 
 // stack overflow
