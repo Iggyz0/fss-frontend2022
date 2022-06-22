@@ -2,7 +2,6 @@ import { HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
-import { FileFromUser } from 'src/app/model/file';
 import { FilesService } from 'src/app/services/files.service';
 import { JwttokenService } from 'src/app/services/jwttoken.service';
 
@@ -61,14 +60,6 @@ export class NewfileComponent implements OnInit {
       });
     }
   }
-
-  // .add(() => { 
-  //   this._snackBar.open("File(s) successfully uploaded!", "Ok", {duration: 2000});
-  //   setTimeout(() => {
-  //     this.reset();
-  //     this.fileName = "";
-  //   }, 2000);
-  // });
 
   cancelUpload() {
     this.uploadSub!.unsubscribe();
